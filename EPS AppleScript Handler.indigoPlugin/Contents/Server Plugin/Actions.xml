@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Actions>
+	<SupportURL>http://forums.indigodomo.com/viewtopic.php?f=196&amp;t=16112</SupportURL>
+	
+	<Action id="runScript" >
+		<Name>Run AppleScript</Name>
+		<CallbackMethod>scriptRun</CallbackMethod>
+		<ConfigUI>
+			<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
+			
+			<Field type="menu" id="script">
+                <Label>AppleScript:</Label>
+                <List class="self" filter="" method="getScripts" dynamicReload="true"/>
+            </Field>
+			
+		</ConfigUI>
+	</Action>
+</Actions>
