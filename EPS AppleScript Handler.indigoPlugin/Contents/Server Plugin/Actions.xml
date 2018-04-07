@@ -4,15 +4,46 @@
 	
 	<Action id="runScript" >
 		<Name>Run AppleScript</Name>
-		<CallbackMethod>scriptRun</CallbackMethod>
+		<CallbackMethod>run_applescript</CallbackMethod>
 		<ConfigUI>
-			<SupportURL>http://www.perceptiveautomation.com/wiki/doku.php?id=plugins:example_dev_1</SupportURL>
+			<SupportURL>https://github.com/Colorado4Wheeler/Indigo-AppleScript-Handler</SupportURL>
 			
 			<Field type="menu" id="script">
                 <Label>AppleScript:</Label>
-                <List class="self" filter="" method="getScripts" dynamicReload="true"/>
+                <List class="self" filter="" method="get_folder_scripts" dynamicReload="true"/>
             </Field>
+            
+            <Field type="checkbox" id="extra" defaultValue="false">
+				<Label> </Label>
+				<Description>I want to do something with the result</Description>
+			</Field>
+			
+			<Field type="separator" id="sep_1" visibleBindingId="extra" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true"/>
+			
+			<Field type="menu" id="extraAction" defaultValue="storePlugin" visibleBindingId="extra" visibleBindingValue="true" alwaysUseInDialogHeightCalc="true">
+                <Label>Extra action:</Label>
+                <List>
+                	<Option value="storePlugin">Store it in the plugin</Option>
+                    <Option value="storeExistingVariable">Store it in an existing variable</Option>
+                    <Option value="storeNewVariable">Store it in a new variable</Option>
+                </List>
+            </Field>
+            
+			<Field type="menu" id="variable" visibleBindingId="extraAction" visibleBindingValue="storeExistingVariable" alwaysUseInDialogHeightCalc="true">
+				<Label>Variable:</Label>
+				<List class="indigo.variables" filter=""/>
+			</Field>
+			
+			<Field type="textfield" id="name" defaultValue="ScriptResult" visibleBindingId="extraAction" visibleBindingValue="storePlugin,storeNewVariable" tooltip="Name of the plugin variable for this value, can be any alphanumeric character or underscore but cannot contain spaces." alwaysUseInDialogHeightCalc="true">
+				<Label>Name:</Label>
+			</Field>
 			
 		</ConfigUI>
+	</Action>
+	
+	<!-- =========== hidden action to get value from external plugin =========== -->
+	<Action id="getStoredValue" uiPath="hidden">
+		<Name>Get Stored Value</Name>
+		<CallbackMethod>get_stored_value</CallbackMethod>
 	</Action>
 </Actions>
